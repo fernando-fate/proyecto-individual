@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            :root {
+                --cream: #f5f0e8;
+                --ink: #1a1410;
+                --rust: #c4572a;
+                --warm-gray: #8c7b6e;
+                --border: #d9cebc;
+            }
+
+            body {
+                background: var(--cream);
+                font-family: 'DM Sans', sans-serif;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+                background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C4572A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            }
+
+            .card {
+                background: #fefcf8;
+                border: 1px solid var(--border);
+                max-width: 480px;
+                width: 100%;
+                padding: 0;
+                overflow: hidden;
+                box-shadow: 6px 6px 0px var(--ink);
+                animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+            }
+
+            @keyframes rise {
+                from {
+                    opacity: 0;
+                    transform: translateY(24px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .header {
+                background: var(--ink);
+                padding: 2.5rem 2.5rem 2rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: -40px;
+                right: -40px;
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                border: 40px solid var(--rust);
+                opacity: 0.15;
+            }
+
+            .header::after {
+                content: '';
+                position: absolute;
+                bottom: -20px;
+                left: 30%;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: 25px solid var(--rust);
+                opacity: 0.08;
+            }
+
+            .role-tag {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 10px;
+                font-weight: 500;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--rust);
+                margin-bottom: 0.75rem;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .role-tag::before {
+                content: '';
+                display: inline-block;
+                width: 20px;
+                height: 1px;
+                background: var(--rust);
+            }
+
+            .name {
+                font-family: 'Playfair Display', serif;
+                font-size: 2.4rem;
+                font-weight: 700;
+                color: var(--cream);
+                line-height: 1.1;
+                margin-bottom: 0.3rem;
+            }
+
+            .name em {
+                color: var(--rust);
+                font-style: italic;
+            }
+
+            .tagline {
+                font-size: 13px;
+                color: var(--warm-gray);
+                font-weight: 300;
+                margin-top: 0.75rem;
+                font-style: italic;
+                font-family: 'Playfair Display', serif;
+            }
+
+            .avatar-row {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                margin-top: 1.5rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            .avatar {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #c4572a 0%, #8b3a1a 100%);
+                border: 3px solid var(--cream);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Playfair Display', serif;
+                font-size: 22px;
+                font-weight: 700;
+                color: var(--cream);
+            }
+
+            .status {
+                font-size: 11px;
+                color: #5ebf8a;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-weight: 500;
+            }
+
+            .status-dot {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #5ebf8a;
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.4;
+                }
+            }
+
+            .body {
+                padding: 2rem 2.5rem;
+            }
+
+            .section-label {
+                font-size: 9px;
+                letter-spacing: 0.25em;
+                text-transform: uppercase;
+                color: var(--warm-gray);
+                margin-bottom: 1rem;
+                font-weight: 500;
+            }
+
+            .contact-list {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                margin-bottom: 2rem;
+            }
+
+            .contact-item {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 0.85rem 0;
+                border-bottom: 1px solid var(--border);
+                animation: fadeIn 0.4s ease both;
+            }
+
+            .contact-item:last-child {
+                border-bottom: none;
+            }
+
+            .contact-item:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+            .contact-item:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            .contact-item:nth-child(3) {
+                animation-delay: 0.3s;
+            }
+            .contact-item:nth-child(4) {
+                animation-delay: 0.4s;
+            }
+            .contact-item:nth-child(5) {
+                animation-delay: 0.5s;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(-8px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .icon {
+                width: 36px;
+                height: 36px;
+                background: var(--cream);
+                border: 1px solid var(--border);
+                border-radius: 2px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                font-size: 15px;
+            }
+
+            .contact-info {
+                flex: 1;
+            }
+
+            .contact-type {
+                font-size: 10px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--warm-gray);
+                font-weight: 500;
+            }
+
+            .contact-value {
+                font-size: 14px;
+                color: var(--ink);
+                font-weight: 400;
+                margin-top: 1px;
+            }
+
+            .contact-value a {
+                color: var(--ink);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            .contact-value a:hover {
+                color: var(--rust);
+            }
+
+            .divider {
+                border: none;
+                border-top: 1px solid var(--border);
+                margin: 0 0 1.75rem;
+            }
+
+            .skills {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                margin-bottom: 2rem;
+            }
+
+            .skill-tag {
+                font-size: 11px;
+                padding: 4px 12px;
+                border: 1px solid var(--border);
+                color: var(--warm-gray);
+                font-weight: 400;
+                letter-spacing: 0.05em;
+                transition: all 0.2s;
+                cursor: default;
+                background: transparent;
+            }
+
+            .skill-tag:hover {
+                border-color: var(--rust);
+                color: var(--rust);
+                background: #fdf6f2;
+            }
+
+            .cta {
+                display: flex;
+                gap: 10px;
+            }
+
+            .btn {
+                flex: 1;
+                padding: 0.85rem;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                cursor: pointer;
+                border: 1px solid var(--ink);
+                transition: all 0.2s;
+                text-align: center;
+            }
+
+            .btn-primary {
+                background: var(--ink);
+                color: var(--cream);
+            }
+
+            .btn-primary:hover {
+                background: var(--rust);
+                border-color: var(--rust);
+            }
+
+            .btn-secondary {
+                background: transparent;
+                color: var(--ink);
+            }
+
+            .btn-secondary:hover {
+                background: var(--cream);
+                border-color: var(--rust);
+                color: var(--rust);
+            }
+
+            .footer {
+                padding: 1rem 2.5rem;
+                background: var(--cream);
+                border-top: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .footer-text {
+                font-size: 11px;
+                color: var(--warm-gray);
+            }
+
+            .footer-loc {
+                font-size: 11px;
+                color: var(--warm-gray);
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <div class="header">
+                <div class="role-tag">Arquitecta de Interiores</div>
+                <div class="name">Valeria <em>Montiel</em></div>
+                <div class="tagline">
+                    "Los espacios cuentan historias antes de que hables."
+                </div>
+                <div class="avatar-row">
+                    <div class="avatar">VM</div>
+                    <div class="status">
+                        <span class="status-dot"></span>
+                        Disponible para proyectos
+                    </div>
+                </div>
+            </div>
+
+            <div class="body">
+                <p class="section-label">Información de contacto</p>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <div class="icon">📞</div>
+                        <div class="contact-info">
+                            <div class="contact-type">Teléfono</div>
+                            <div class="contact-value">+505 8812 4473</div>
+                        </div>
+                    </li>
+
+                    <li class="contact-item">
+                        <div class="icon">✉️</div>
+                        <div class="contact-info">
+                            <div class="contact-type">Correo</div>
+                            <div class="contact-value">
+                                <a href="#">valeria.montiel@estudio-vm.com</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="contact-item">
+                        <div class="icon">🌐</div>
+                        <div class="contact-info">
+                            <div class="contact-type">Portafolio</div>
+                            <div class="contact-value">
+                                <a href="#">estudio-vm.com</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="contact-item">
+                        <div class="icon">💼</div>
+                        <div class="contact-info">
+                            <div class="contact-type">LinkedIn</div>
+                            <div class="contact-value">
+                                <a href="#">linkedin.com/in/valeriamontiel</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="contact-item">
+                        <div class="icon">📸</div>
+                        <div class="contact-info">
+                            <div class="contact-type">Instagram</div>
+                            <div class="contact-value">
+                                <a href="#">@valeria.espacios</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <hr class="divider" />
+
+                <p class="section-label">Especialidades</p>
+                <div class="skills">
+                    <span class="skill-tag">Diseño residencial</span>
+                    <span class="skill-tag">Interiorismo comercial</span>
+                    <span class="skill-tag">AutoCAD</span>
+                    <span class="skill-tag">3ds Max</span>
+                    <span class="skill-tag">Iluminación</span>
+                    <span class="skill-tag">Biofilia</span>
+                </div>
+
+                <div class="cta">
+                    <button class="btn btn-primary">Enviar mensaje</button>
+                    <button class="btn btn-secondary">Ver portafolio</button>
+                </div>
+            </div>
+
+            <div class="footer">
+                <span class="footer-text">Estudió en UNI · 8 años de exp.</span>
+                <span class="footer-loc">📍 Managua, Nicaragua</span>
+            </div>
+        </div>
+    </body>
+</html>
